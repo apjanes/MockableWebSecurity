@@ -2,7 +2,7 @@ task :nuget, :needs => ['build','nu:spec','nu:pack'] do
 end
 
 namespace :nu do
-  nugetpack :pack, :needs => ['nu:spec'] do |pack|
+  nugetpack :pack => ['nu:spec'] do |pack|
     pack.command = $nuget[:command]
     pack.nuspec = $nuspec[:output]
   end
