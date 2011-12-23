@@ -1,0 +1,5 @@
+# Default build task (rake build)
+nunit :test do |nunit|
+  nunit.command = "packages/NUnit.2.5.10.11092/tools/nunit-console.exe"
+  nunit.assemblies "tests/bin/Debug/MockableWebSecurity.UnitTests.dll"
+end
