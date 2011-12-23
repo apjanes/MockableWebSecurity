@@ -1,21 +1,21 @@
 # Default build task (rake build)
-msbuild :build, [:configuration] => ['build:assemblyinfo'] do |msb, args|
+msbuild :build, [:configuration, :version] => ['build:assemblyinfo'] do |msb, args|
   conf = args[:configuration] || :Debug
   msb.properties :configuration=>conf
   msb.solution = $solution
 end
 
 namespace :build do
-  assemblyinfo :assemblyinfo do |asm|
-    increment_version
-    asm.version = get_version
+  assemblyinfo :assemblyinfo, [:version] do |asm, args|
+    version = args[:version] || '0.0.0.0'
+    asm.version = version
     asm.company_name = $asm[:company]
     asm.product_name = $asm[:product]
     asm.title = $asm[:title]
     asm.description = $asm[:description]
     asm.copyright = $asm[:copyright]
     asm.output_file = $asm[:output]
-    asm.custom_attributes :AssemblyFileVersion=>get_version
+    asm.custom_attributes :AssemblyFileVersion=>version
   end
   
   task :debug => [:build] do
