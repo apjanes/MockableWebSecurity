@@ -1,5 +1,5 @@
 task :clean do
-  puts cyan{bold{"\nCleaning binaries:"}}
+  puts "\nCleaning binaries:"
   files = []
   
   if Dir.exists?($bin_dir)
@@ -20,11 +20,11 @@ task :clean do
   add_dirs('db', files)
   
   if files.empty?
-    puts yellow{bold{"  No files to clean."}}
+    puts "  No files to clean."
   else
     files.each do |x|
       FileUtils.rm_rf(x)
-      puts bold{"  Deleting: "} + x
+      puts "  Deleting: " + x
     end
   end
 end

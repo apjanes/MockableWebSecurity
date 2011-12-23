@@ -46,9 +46,6 @@ require 'find'
 unless require 'albacore'
   raise "Requires the 'albacore' gem"
 end
-require 'win32console'
-require 'term/ansicolor'
-include Term::ANSIColor
 
 Dir.glob(File.join($task_dir, "*.task")).each do |x|
   load 'tasks/' + File.basename(x)
