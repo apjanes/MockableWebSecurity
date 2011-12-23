@@ -2,7 +2,6 @@ TestResults
 [Bb]in/
 [Oo]bj/
 Debug/
-packages/
 Release/
 .hg/
 .hgignore
