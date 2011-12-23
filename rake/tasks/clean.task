@@ -1,0 +1,41 @@
+task :clean do
+  puts cyan{bold{"\nCleaning binaries:"}}
+  files = []
+  
+  if Dir.exists?($bin_dir)
+    Dir.entries($bin_dir).each do |f|
+      files.push(File.join($bin_dir, f)) unless f =~ /^\.{1,2}$/
+    end
+  end
+  
+  if Dir.exists?($base_dir)
+    Dir.entries($base_dir).each do |f|
+      files.push(File.join($base_dir, f)) if f =~ /\.nupkg$/i
+    end
+  end
+  
+  add_dirs('src', files)
+  add_dirs('features', files)
+  add_dirs('test', files)
+  add_dirs('db', files)
+  
+  if files.empty?
+    puts yellow{bold{"  No files to clean."}}
+  else
+    files.each do |x|
+      FileUtils.rm_rf(x)
+      puts bold{"  Deleting: "} + x
+    end
+  end
+end
+
+private
+def add_dirs(dir, dirs)
+  dir = File.join($base_dir, dir)
+  return unless Dir.exists?(dir)
+  Find.find(dir) do |f|
+    if File.directory?(f) and File.basename(f) =~ /^bin|obj$/i
+      dirs.push(f)
+    end
+  end
+end

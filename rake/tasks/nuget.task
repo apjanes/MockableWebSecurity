@@ -1,0 +1,21 @@
+task :nuget, :needs => ['build','nu:spec','nu:pack'] do
+end
+
+namespace :nu do
+  nugetpack :pack, :needs => ['nu:spec'] do |pack|
+    pack.command = $nuget[:command]
+    pack.nuspec = $nuspec[:output]
+  end
+  
+  nuspec :spec do |spec|
+    spec.id = $nuspec[:id]
+    spec.version = get_version
+    spec.authors = $asm[:company]
+    spec.description = $asm[:description]
+    spec.title = $asm[:title]
+    spec.output_file = $nuspec[:output]
+    spec.licenseUrl = $nuspec[:licenseUrl]
+    spec.projectUrl = $nuspec[:projectUrl]
+    spec.file "bin\\*.*","lib"     
+  end
+end
