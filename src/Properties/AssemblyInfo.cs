@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCompany("Peppermint IT Limited")]
 [assembly: AssemblyProduct("Mockable Web Security")]
 [assembly: AssemblyCopyright("Copyright 2011 by Peppermint IT Limited")]
-[assembly: AssemblyVersion("0.0.0.83")]
+[assembly: AssemblyVersion("0.0.0.84")]
 
-[assembly: AssemblyFileVersion("0.0.0.83")]
+[assembly: AssemblyFileVersion("0.0.0.84")]
 
