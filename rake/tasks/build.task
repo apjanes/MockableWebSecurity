@@ -1,4 +1,5 @@
 # Default build task (rake build)
+require 'lib/version'
 msbuild :build, [:configuration, :version] => ['build:assemblyinfo'] do |msb, args|
   conf = args[:configuration] || :Debug
   msb.properties :configuration=>conf
@@ -7,15 +8,16 @@ end
 
 namespace :build do
   assemblyinfo :assemblyinfo, [:version] do |asm, args|
-    version = args[:version] || '0.0.0.0'
-    asm.version = version
+    version = current_version
+    version.increment(args[:version]) if args[:version]
+    asm.version = version.assembly_version
     asm.company_name = $asm[:company]
     asm.product_name = $asm[:product]
     asm.title = $asm[:title]
     asm.description = $asm[:description]
     asm.copyright = $asm[:copyright]
     asm.output_file = $asm[:output]
-    asm.custom_attributes :AssemblyFileVersion=>version
+    asm.custom_attributes :AssemblyFileVersion=>version.file_version
   end
   
   task :debug => [:build] do
@@ -24,5 +26,26 @@ namespace :build do
   
   task :release do |t|
     Rake::Task[:build].execute({:configuration=>:Release})
+  end
+  
+  task :current_version do |t|
+    version = current_version
+    version.increment(:revision)
+    p version
+    version.increment(:minor)
+    p version
+  end
+  
+  private
+  def current_version
+    if File.exists?($asm[:output])
+      File.open($asm[:output]).each do |x|
+        if(x =~ /AssemblyVersion\("(.*?)"\)/)
+          return Version.new($1)
+        end
+      end
+    else
+      raise "Could not find AssemblyInfo.cs at: " + $asm[:output]
+    end
   end
 end
