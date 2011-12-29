@@ -10,6 +10,9 @@ namespace :build do
   assemblyinfo :assemblyinfo, [:version] do |asm, args|
     version = current_version
     version.increment(args[:version]) if args[:version]
+    puts "Building using:"
+    puts "  AssemblyVersion:     #{version.assembly_version}"
+    puts "  AssemblyFileVersion: #{version.file_version}"
     asm.version = version.assembly_version
     asm.company_name = $asm[:company]
     asm.product_name = $asm[:product]
@@ -40,7 +43,7 @@ namespace :build do
   def current_version
     if File.exists?($asm[:output])
       File.open($asm[:output]).each do |x|
-        if(x =~ /AssemblyVersion\("(.*?)"\)/)
+        if(x =~ /AssemblyFileVersion\("(.*?)"\)/)
           return Version.new($1)
         end
       end
