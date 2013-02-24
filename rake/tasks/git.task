@@ -1,0 +1,15 @@
+namespace :git do
+  task :add do
+    raise 'You must specify some a file or file pattern to add: files=.' unless ENV['files']
+    system("git add #{ENV['files']}")    
+  end
+  
+  task :commit do
+    raise 'You must specify a commit message:  m="my message"' unless ENV['m']
+    system("git commit -m \"#{ENV['m']}\"")
+  end
+  
+  task :push do
+    system("git push")
+  end
+end
