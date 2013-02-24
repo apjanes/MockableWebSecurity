@@ -1,4 +1,4 @@
-assemblyinfo :version do
+assemblyinfo :version do |asm|
   asm.version = ENV['version']
   asm.company_name = $asm[:company]
   asm.product_name = $asm[:product]
