@@ -2,6 +2,7 @@ namespace :teamcity do
   task :ci do
     Rake::Task["version"].invoke
     Rake::Task["build"].invoke
+    Rake::Task["test"].invoke
     Rake::Task["git:add"].invoke
     Rake::Task["git:commit"].invoke
     Rake::Task["git:push"].invoke
