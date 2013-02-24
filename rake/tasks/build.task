@@ -1,6 +1,6 @@
 # Default build task (rake build)
 require 'lib/version'
-msbuild :build, [:configuration, :version] => ['build:assemblyinfo'] do |msb, args|
+msbuild :build, [:configuration] do |msb, args|
   conf = args[:configuration] || :Debug
   msb.properties :configuration=>conf
   msb.solution = $solution
@@ -10,17 +10,17 @@ namespace :build do
   assemblyinfo :assemblyinfo, [:version] do |asm, args|
     version = current_version  
     
-    version.increment(args[:version]) if args[:version]
-    
-    if ENV['version']
-      puts "Versioning using: #{ENV['version']}"
-      version.increment(ENV['version'])
+    if args[:version]
+      version.increment(args[:version])
     end
     
-
-    puts "Building using:"
-    puts "  AssemblyVersion:     #{version.assembly_version}"
-    puts "  AssemblyFileVersion: #{version.file_version}"
+    asv = version.assembly_version
+    afv = version.file_version
+    
+    
+      puts "Building using:"
+      puts "  AssemblyVersion:     #{version.assembly_version}"
+      puts "  AssemblyFileVersion: #{version.file_version}"
     asm.version = version.assembly_version
     asm.company_name = $asm[:company]
     asm.product_name = $asm[:product]
