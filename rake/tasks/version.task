@@ -1,10 +1,10 @@
 assemblyinfo :version do |asm|
-  asm.version = ENV['version']
+  asm.version = '0.0.0.0'
   asm.company_name = $asm[:company]
   asm.product_name = $asm[:product]
   asm.title = $asm[:title]
   asm.description = $asm[:description]
   asm.copyright = $asm[:copyright]
   asm.output_file = $asm[:output]
-  asm.custom_attributes :AssemblyFileVersion=>version.file_version
+  asm.custom_attributes :AssemblyFileVersion=>ENV['version']
 end
