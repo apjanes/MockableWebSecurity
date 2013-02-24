@@ -8,13 +8,15 @@ end
 
 namespace :build do
   assemblyinfo :assemblyinfo, [:version] do |asm, args|
-    version = current_version
-    if args[:version]
-      version.increment(args[:version]) 
-    elsif ENV['version']
+    version = current_version  
+    if ENV['version']
       puts "Versioning using: #{ENV['version']}"
       version.increment(ENV['version'])
     end
+    
+    version.increment(args[:version]) if args[:version]
+    
+
     puts "Building using:"
     puts "  AssemblyVersion:     #{version.assembly_version}"
     puts "  AssemblyFileVersion: #{version.file_version}"
