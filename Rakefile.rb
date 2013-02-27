@@ -1,7 +1,6 @@
 $base_dir = File.dirname(__FILE__)
 
 # Configurable properties
-$solution = 'MockableWebSecurity.sln'
 $asm = {}
 $asm[:company] = 'Peppermint IT Limited'
 $asm[:product] = 'Mockable Web Security'
@@ -26,9 +25,14 @@ $rake_dir = File.join($base_dir, 'rake')
 $task_dir = File.join($rake_dir, 'tasks')
 $LOAD_PATH << $rake_dir
 
+$manifest_path = File.join($base_dir, 'manifest.yml')
+
 # Requires
 require 'rubygems'
 require 'find'
+require 'lib/manifest'
+$manifest = Manifest.new($manifest_path)
+
 unless require 'albacore'
   raise "Requires the 'albacore' gem"
 end

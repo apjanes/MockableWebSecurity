@@ -3,7 +3,7 @@ require 'lib/version'
 msbuild :build, [:configuration] do |msb, args|
   conf = args[:configuration] || :Debug
   msb.properties :configuration=>conf
-  msb.solution = $solution
+  msb.solution = $manifest.solution
 end
 
 namespace :build do
