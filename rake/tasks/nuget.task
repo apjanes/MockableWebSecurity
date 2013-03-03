@@ -10,9 +10,9 @@ namespace :nu do
   nuspec :spec do |spec|
     spec.id = $nuspec[:id]
     spec.version = get_version
-    spec.authors = $asm[:company]
-    spec.description = $asm[:description]
-    spec.title = $asm[:title]
+    spec.authors = $manifest.company
+    spec.description = $manifest.description
+    spec.title = $manifest.title
     spec.output_file = $nuspec[:output]
     spec.licenseUrl = $nuspec[:licenseUrl]
     spec.projectUrl = $nuspec[:projectUrl]
