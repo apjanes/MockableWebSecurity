@@ -2,10 +2,10 @@ assemblyinfo :version do |asm|
   require 'lib/version'
   version = Version.new(ENV['version'])
   asm.version = version.assembly_version
-  asm.company_name = $asm[:company]
-  asm.product_name = $asm[:product]
-  asm.title = $asm[:title]
-  asm.description = $asm[:description]
+  asm.company_name = $manifest.company
+  asm.product_name = $manifest.name
+  asm.title = $manifest.title
+  asm.description = $manifest.description
   asm.copyright = $manifest.copyright
   asm.output_file = $asm[:output]
   asm.custom_attributes :AssemblyFileVersion=>version.file_version

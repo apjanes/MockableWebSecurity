@@ -2,11 +2,6 @@ $base_dir = File.dirname(__FILE__)
 
 # Configurable properties
 $asm = {}
-$asm[:company] = 'Peppermint IT Limited'
-$asm[:product] = 'Mockable Web Security'
-$asm[:title] = $asm[:product]
-$asm[:description] = "Many components of the System.Web.Security namespace are static methods that are difficult to mock or stub for testing. MockableWebSecurity wraps many of these classes in interfaces with proxy implementations allowing for more easy creation of testable code."
-$asm[:copyright] = "Copyright 2011 by Peppermint IT Limited"
 $asm[:output] = File.join($base_dir, "src/Properties/AssemblyInfo.cs")
 
 $nuspec = {} 
