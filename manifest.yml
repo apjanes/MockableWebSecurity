@@ -2,6 +2,9 @@ code:           MockableWebSecurity
 name:           Mockable Web Security
 company:        Peppermint IT Limited
 project_url:    https://github.com/apjanes/MockableWebSecurity
+copyright:
+  start_year:   2011
+  end_year:     2012
 description: >
     Many components of the System.Web.Security namespace are static methods that are 
     difficult to mock or stub for testing. MockableWebSecurity wraps many of these 
