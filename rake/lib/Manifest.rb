@@ -12,6 +12,9 @@ class Manifest
       end
       self.copyright = "Copyright #{self.copyright.start_year} to #{self.copyright.end_year} by #{self.company}"
     end
+    
+    self.src_dir = self.src_dir || 'src'
+    self.assembly_info_path = self.assembly_info_path || File.join(self.src_dir, 'Properties/AssemblyInfo.cs')
   end
   
   def method_missing(meth, *args, &block)

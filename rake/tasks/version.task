@@ -1,12 +1,14 @@
-assemblyinfo :version do |asm|
+task :version do 
   require 'lib/version'
-  version = Version.new(ENV['version'])
-  asm.version = version.assembly_version
-  asm.company_name = $manifest.company
-  asm.product_name = $manifest.name
-  asm.title = $manifest.title
-  asm.description = $manifest.description
-  asm.copyright = $manifest.copyright
-  asm.output_file = $asm[:output]
-  asm.custom_attributes :AssemblyFileVersion=>version.file_version
+  require 'lib/assembly_info'
+  
+  if ENV['version'] then
+    version = Version.new(ENV['version'])
+    info = AssemblyInfo.new
+    info.version = version.assembly_version
+    info.file_version = version.file_version
+    info.save
+  else
+    puts "WARNING: No version specified for version task."
+  end
 end

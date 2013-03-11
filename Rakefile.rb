@@ -1,9 +1,6 @@
 $base_dir = File.dirname(__FILE__)
 
 # Configurable properties
-$asm = {}
-$asm[:output] = File.join($base_dir, "src/Properties/AssemblyInfo.cs")
-
 $nuspec = {} 
 $nuspec[:id] = "MockableWebSecurity"
 $nuspec[:output] = "#{$nuspec[:id]}.nuspec"
@@ -12,7 +9,7 @@ $nuspec[:projectUrl] = 'http://mockablewebsecurity.codeplex.com'
 
 
 $nuget = {}
-$nuget[:command] = 'C:/NuGet.exe'
+$nuget[:command] = 'C:/Apps/NuGet.exe'
 
 # Directory configuration
 $bin_dir = File.join($base_dir, 'bin')
@@ -26,11 +23,8 @@ $manifest_path = File.join($base_dir, 'manifest.yml')
 require 'rubygems'
 require 'find'
 require 'lib/manifest'
+require 'lib/utils'
 $manifest = Manifest.new($manifest_path)
-
-unless require 'albacore'
-  raise "Requires the 'albacore' gem"
-end
 
 Dir.glob(File.join($task_dir, "*.task")).each do |x|
   load 'tasks/' + File.basename(x)

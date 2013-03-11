@@ -1,62 +1,18 @@
 # Default build task (rake build)
-require 'lib/version'
-msbuild :build, [:configuration] do |msb, args|
-  conf = args[:configuration] || :Debug
-  msb.properties :configuration=>conf
+task :build, [:configuration] do |t, args|
+  require 'lib/msbuild'
+  msb = MsBuild.new
   msb.solution = $manifest.solution
+  msb.properties.configuration = args[:configuration] || :Debug
+  msb.build
 end
 
 namespace :build do
-  assemblyinfo :assemblyinfo, [:version] do |asm, args|
-    version = current_version  
-    
-    if args[:version]
-      version.increment(args[:version])
-    end
-    
-    asv = version.assembly_version
-    afv = version.file_version
-    
-    
-      puts "Building using:"
-      puts "  AssemblyVersion:     #{version.assembly_version}"
-      puts "  AssemblyFileVersion: #{version.file_version}"
-    asm.version = version.assembly_version
-    asm.company_name = $manifest.company
-    asm.product_name = $manifest.name
-    asm.title = $manifes.title
-    asm.description = $manifest.description
-    asm.copyright = $manifest.copyright
-    asm.output_file = $asm[:output]
-    asm.custom_attributes :AssemblyFileVersion=>version.file_version
-  end
-  
   task :debug => [:build] do
     
   end
   
   task :release do |t|
     Rake::Task[:build].execute({:configuration=>:Release})
-  end
-  
-  task :current_version do |t|
-    version = current_version
-    version.increment(:revision)
-    p version
-    version.increment(:minor)
-    p version
-  end
-  
-  private
-  def current_version
-    if File.exists?($asm[:output])
-      File.open($asm[:output]).each do |x|
-        if(x =~ /AssemblyFileVersion\("(.*?)"\)/)
-          return Version.new($1)
-        end
-      end
-    else
-      raise "Could not find AssemblyInfo.cs at: " + $asm[:output]
-    end
   end
 end

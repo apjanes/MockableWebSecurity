@@ -1,6 +1,6 @@
 class Version
   def initialize(version)
-    items = version.split('.')
+    items = version ? version.split('.') : []
     @data = {}
     @keys = [:major, :minor, :build, :revision]
     @data[:major] = items[0].to_i || 0
