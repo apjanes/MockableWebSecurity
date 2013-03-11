@@ -7,4 +7,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyright("Copyright 2011 to 2012 by Peppermint IT Limited")]
 [assembly: AssemblyVersion("0.0.0.0")]
 
-[assembly: AssemblyFileVersion("0.0.2.46")]
+[assembly: AssemblyFileVersion("0.0.2.47")]
