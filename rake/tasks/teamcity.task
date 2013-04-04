@@ -9,4 +9,9 @@ namespace :teamcity do
     Rake::Task["git:commit"].invoke
     Rake::Task["git:push"].invoke
   end
+  
+  task :patch_posttest do
+    Rake::Task["git:branch"].invoke
+    Rake::Task["git:push"].invoke
+  end
 end
