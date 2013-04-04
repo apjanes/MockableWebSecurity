@@ -21,7 +21,8 @@ namespace :git do
   end
   
   task :push do
-    #branch = ENV['branch'] || 'master'
-    system("git push")
+    remote = ENV['remote'] || 'origin'
+    branch = ENV['branch'] || 'master'
+    system("git push #{remote} #{branch}")
   end
 end
