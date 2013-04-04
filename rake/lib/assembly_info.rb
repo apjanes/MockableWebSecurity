@@ -31,7 +31,7 @@ class AssemblyInfo
   def method_missing(meth, *args, &block)
     key = to_prop(meth.to_s)
     if (key =~ /=$/) then
-      key = key[0..-2]
+      key = key.chop
       val = @by_key[key]
       if val then
         val[:value] = args[0]
@@ -44,7 +44,7 @@ class AssemblyInfo
         @by_key[key] = {:key => key, :value => args[0], :index => index}
       end
     else
-      val = @by_key[meth]
+      val = @by_key[key]
       return val[:value] if (val)
     end
   end

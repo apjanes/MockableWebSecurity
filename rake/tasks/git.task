@@ -9,7 +9,19 @@ namespace :git do
     system("git commit -m \"#{ENV['m']}\"")
   end
   
+  task :branch do
+    branch = ENV['branch']
+    raise "A branch name is require" unless branch
+    system ("git branch #{branch}")
+  end
+  
+  task :checkout do
+    branch = ENV['branch'] || 'master'
+    system ("git checkout #{branch}")
+  end
+  
   task :push do
+    #branch = ENV['branch'] || 'master'
     system("git push")
   end
 end

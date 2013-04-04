@@ -1,10 +1,41 @@
-code:           MockableWebSecurity
-name:           Mockable Web Security
-company:        Peppermint IT Limited
-project_url:    https://github.com/apjanes/MockableWebSecurity
+code:                          MockableWebSecurity
+name:                          Mockable Web Security
+company:                       Peppermint IT Limited
+project_url:                   https://github.com/apjanes/MockableWebSecurity
+nuget:
+  path:                       C:/Apps/NuGet/NuGet.exe
+  tags:                       a a a a
+  urls:
+    license:                  http://mockablewebsecurity.codeplex.com/license
+    project:                  http://mockablewebsecurity.codeplex.com/    
+  files:
+    - src:                    bin\**\*.*
+      target:                 lib
+#      exclude:                xyz
+#    - src:                    bin\**\*.*
+#      target:                 lib
+#  dependencies:
+#    - framework: net35
+#      items:
+#        - id: NUnit
+#          version: 2.1.5
+#    - items:
+#        - id: Ninject
+#  references:
+#    - file: test.dll
+#    - file: xpath.dll
+    
+#  framework_references:
+#    - assembly: System.Web
+#      framework: net40
+#    - assembly: System.Configuration
+#  release_notes: |
+#    - Lots of things.
+#    - More stuff
+#            
 copyright:
-  start_year:   2011
-  end_year:     2012
+  start_year:                 2011
+  end_year:                   2012
 description: >
     Many components of the System.Web.Security namespace are static methods that are 
     difficult to mock or stub for testing. MockableWebSecurity wraps many of these 

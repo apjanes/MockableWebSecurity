@@ -1,6 +1,7 @@
 class Manifest
   require 'yaml'
   require 'time'
+  require 'lib/assembly_info'
   def initialize(path)
     @data = YAML.load_file(path)
     self.solution = self.solution || "#{self.code}.sln"
@@ -15,6 +16,7 @@ class Manifest
     
     self.src_dir = self.src_dir || 'src'
     self.assembly_info_path = self.assembly_info_path || File.join(self.src_dir, 'Properties/AssemblyInfo.cs')
+    self.assembly_info = AssemblyInfo.new(self.assembly_info_path)
   end
   
   def method_missing(meth, *args, &block)
